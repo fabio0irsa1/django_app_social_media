@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+  {% if registered %}
+    <h1>Thank you for registering!</h1>
+  {% else %}
+    <h1>Sign Up</h1>
+
+    <form enctype="multipart/form-data" method="POST" class="form"  oninput='password2.setCustomValidity(password2.value != password.value ? "Passwords do not match." : "")'>
+      {% if user_form.errors %}
+        {% for field in user_form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                  <button class="close" type="button" data-dismiss="alert" aria-label="close">×</button>
+                  {{ error|escape }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in user_form.non_field_errors %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                  <button class="close" type="button" data-dismiss="alert" aria-label="close">×</button>
+                  {{ error|escape }}
+                </div>
+        {% endfor %}
+      {% endif %}
+
+      {% if profile_form.errors %}
+        {% for field in profile_form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                  <button class="close" type="button" data-dismiss="alert" aria-label="close">×</button>
+                  {{ error|escape }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in profile_form.non_field_errors %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                  <button class="close" type="button" data-dismiss="alert" aria-label="close">×</button>
+                  {{ error|escape }}
+                </div>
+        {% endfor %}
+
+      {% endif %}
+
+      {% csrf_token %}
+      <p>Only fields marked with an asterisk (*) are required.</p>
+      <p>
+        <label for="id_username">* Username:</label>
+        {{user_form.username}}
+        <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+      </p>
+        <label for="id_email">* Email address:</label>
+        {{user_form.email}}
+      </p>
+      <p>
+        <label for="id_password">* Password:</label>
+        {{user_form.password}}
+        <span class="helptext">
+          <ul>
+            <li>Your password can’t be too similar to your other personal information.</li>
+            <li>Your password must contain at least 8 characters.</li>
+            <li>Your password can’t be a commonly used password.</li>
+            <li>Your password can’t be entirely numeric.</li>
+          </ul>
+        </span>
+      </p>
+      <p>
+        <label for="id_password2">* Confirm Password:</label>
+        <input type="password" name="password2" class="form-control" required="" id="id_password2">
+        <span class="helptext">Enter the same password as before, for verification.</span>
+      </p>
+      <p>
+        <label for="id_first_name">First name:</label>
+        {{profile_form.first_name}}
+      </p>
+      <p>
+        <label for="id_last_name">Last name:</label>
+        {{profile_form.last_name}}
+      </p>
+      <p>
+      <p><label for="id_birth_date">Birthday:</label>
+         {{profile_form.birth_date}}
+       </p>
+       <label for="customFile">Profile picture:</label>
+       <div class="custom-file ps-custom-file">
+         {{profile_form.profile_pic}}
+         <label class="custom-file-label" for="customFile">Choose file</label>
+       </div>
+       <p>
+         <label for="id_location">Address:</label>
+         {{profile_form.location}}
+       </p>
+       <p>
+          <label for="id_bio">Bio:</label>
+          {{profile_form.bio}}
+       </p>
+       <p>
+         <label for="id_website_link">Website link:</label>
+         {{profile_form.website_link}}
+       </p>
+       <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+       <script>
+          $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+          });
+        </script>
+       <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+
+  {% endif %}
+</div>
+{% endblock %}

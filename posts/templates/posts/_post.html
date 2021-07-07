@@ -1,0 +1,38 @@
+<div class="media ps-post-block">
+		{% if post.user.userprofileinfo.profile_pic %}
+		<a class="mr-3" href="{% url 'posts:for_user' username=post.user.username %}">
+		<span class="wrapper-profile-pic">
+			<img class="ps-profile-pic" src="{{MEDIA_URL}}{{post.user.userprofileinfo.profile_pic.url}}" alt="{{post.user.username}}"/>
+		</span>
+		</a>
+		{% else %}
+		<a class="mr-3" href="{% url 'posts:for_user' username=post.user.username %}">
+			<div class="ps-empty-profile-pic"></div>
+		</a>
+		{% endif %}
+
+	<div class="media-body">
+		<h3><a href="{% url 'posts:for_user' username=post.user.username %}">@{{ post.user.username }}</a></h3>
+		<h5>{{ post.message_html|safe }}</h5>
+			<p>
+				<span class="wrapper">
+				 	<img class="ps-media-img-block" src="{{MEDIA_URL}}{{post.image.url}}" alt="generic media file">
+			 	</span>
+		 </p>
+
+			<time class="time"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{ post.created_at }}</a></time>
+			{% if post.group %}
+			<span class="group-name">in <a href="{% url 'groups:single' slug=post.group.slug %}">{{ post.group.name }}</a></span>
+			{% endif %}
+
+
+		<div class="media-footer">
+			{% if user.is_authenticated and post.user == user and not hide_delete %}
+				<a href="{% url 'posts:delete' pk=post.pk %}" title="delete" class="btn btn-simple">
+					<span class="fa fa-remove text-danger" aria-hidden="true"></span>
+					<span class="text-danger icon-label">Delete</span>
+				</a>
+			{% endif %}
+		</div>
+	</div>
+</div>

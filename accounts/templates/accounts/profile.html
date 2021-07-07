@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+  <h1>@{{access_user.username}}</h1>
+
+<form enctype="multipart/form-data" method="POST" class="form">
+  
+    {% if profile_form.errors %}
+      {% for field in profile_form %}
+          {% for error in field.errors %}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+                <button class="close" type="button" data-dismiss="alert" aria-label="close">×</button>
+                {{ error|escape }}
+              </div>
+          {% endfor %}
+      {% endfor %}
+      {% for error in profile_form.non_field_errors %}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+                <button class="close" type="button" data-dismiss="alert" aria-label="close">×</button>
+                {{ error|escape }}
+              </div>
+      {% endfor %}
+
+    {% endif %}
+
+    {% csrf_token %}
+    <p>Edit your profile and click the Update button.</p>
+    <p>
+      <label for="id_first_name">First name: <strong>{{access_user.userprofileinfo.first_name}}</strong></label>
+      {{profile_form.first_name}}
+    </p>
+    <p>
+      <label for="id_last_name">Last name: <strong>{{access_user.userprofileinfo.last_name}}</strong></label>
+      {{profile_form.last_name}}
+    </p>
+    <p>
+    <p><label for="id_birth_date">Birthday: <strong>{{access_user.userprofileinfo.birth_date}}</strong></label>
+       {{profile_form.birth_date}}
+     </p>
+     <label for="customFile">Profile picture: <br>
+     {% if access_user.userprofileinfo.profile_pic %}
+         <span class="wrapper-profile-pic-user-page">
+     			 <img class="ps-profile-pic-user-page" src="{{MEDIA_URL}}{{access_user.userprofileinfo.profile_pic.url}}" alt="{{access_user.username}}"/>
+     		 </span>
+    {% endif %}
+     </label>
+     <div class="custom-file ps-custom-file">
+       {{profile_form.profile_pic}}
+       <label class="custom-file-label" for="customFile">Change picture</label>
+     </div>
+     <p>
+       <label for="id_location">Address: <br>
+         <strong>{{access_user.userprofileinfo.location}}</strong></label>
+       {{profile_form.location}}
+     </p>
+     <p>
+        <label for="id_bio">Bio: <br>
+          <strong>{{access_user.userprofileinfo.bio|safe}}</strong></label>
+        {{profile_form.bio}}
+     </p>
+     <p>
+       <label for="id_website_link">Website link: <br>
+         <strong><a href="{{access_user.userprofileinfo.website_link}}">{{access_user.userprofileinfo.website_link}}</a></strong></label>
+       {{profile_form.website_link}}
+     </p>
+     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+     <script>
+        $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+      </script>
+     <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+</div>
+{% endblock %}

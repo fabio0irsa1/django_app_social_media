@@ -1,0 +1,149 @@
+body {
+  margin: 0;
+  /* The following line locks the page from scrolling */
+  /* overflow: hidden; */
+  /* background-color: black; */
+  color:white;
+  background-image: url("/static/images/test_project_bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  
+}
+
+/* Blocks */
+.mycontent{
+  margin-top: 122px;
+  margin-bottom: 61px;
+}
+
+.ps-card-img-block{
+  /* copied from bootstrap .card-img-top class */
+  border-top-left-radius: calc(.25rem - 1px);
+  border-top-right-radius: calc(.25rem - 1px);
+}
+
+/* Block size = 200 x 149 for mobile */
+.ps-card-block{
+  margin-bottom: 24px;
+  width: 375px;
+}
+
+.ps-media-img-block, .ps-card-img-block, .ps-profile-pic, .ps-profile-pic-user-page{
+  height: 100%;
+}
+
+.ps-empty-profile-pic, .wrapper-group-img{
+    background-color: #fbfbfb;
+}
+
+.ps-profile-pic{
+
+}
+
+.ps-empty-profile-pic{
+  display: block;
+  width: 64px;
+  height: 64px;
+
+}
+
+.wrapper{
+  display: block;
+  height: 280px;
+  overflow:hidden;
+  width: 375px;
+}
+
+.wrapper-group-img{
+  display: block;
+  height: 280px;
+  overflow:hidden;
+  width: 100%;
+  border-top-right-radius: .22rem;
+  border-top-left-radius: .22rem;
+}
+
+.wrapper-profile-pic{
+  display: block;
+  height: 64px;
+  overflow:hidden;
+  width: 64px;
+}
+
+.wrapper-profile-pic-user-page{
+  display: block;
+  height: 512px;
+  overflow:hidden;
+  width: 512px;
+}
+
+#canvas{
+  position: fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
+#ps-footer-block{
+
+}
+
+.ps-sys-tray{
+  margin-bottom: 24px;
+}
+
+.ps-list-tray{
+  margin-bottom: -24px;
+}
+
+.ps-post-block{
+  margin-bottom: 24px;
+}
+
+.ps-post-tray{
+  margin-bottom: 24px;
+}
+
+.ps-group-post-tray{
+  margin-bottom: 24px;
+}
+
+.ps-delete-post-tray{
+  margin-bottom: 24px;
+}
+
+/* Navbar elelments */
+
+#ps-nav-block{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000000
+
+}
+
+#custom-navbar-text{
+  color:#b7161b;
+  font-style: italic;
+}
+
+#logo-image-nav{
+  width: 32px;
+  height: 32px;
+}
+
+.ps-custom-file{
+  margin-bottom: 1rem;
+}
+
+/* register and sign-up forms width: 432px; */
+
+/* Forms */
+/* Django forms standard error reporting CSS class */
+/* Added Bootstrap Errors */
+.errorlist{
+  display: none;
+}
